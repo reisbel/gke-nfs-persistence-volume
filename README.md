@@ -2,6 +2,14 @@
 
 Create a Network File System(NFS) Server with Google Compute Engine persistent disks and mount them to GKE containers.
 
+## Steps
+
+Clone repository
+
+```bash
+git clone https://github.com/reisbel/gke-nfs-persistence-volume.git && cd gke-nfs-persistence-volume
+```
+
 Set variables
 
 ```bash
@@ -62,10 +70,6 @@ Connect to nfs to create dummy content
 
 ```bash
 kubectl exec -it nfs-server-58fd574d69-pxsrq -- /bin/bash
-```
-
-```bash
-kubectl apply -f config/deployment.yaml
 ```
 
 Write content
