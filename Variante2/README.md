@@ -5,17 +5,18 @@ Create a Network File System(NFS) Server with Google Compute Engine persistent d
 Set variables
 
 ```bash
-NAME=gke-cluster01
+NAME=gke-cluster03
 ZONE=us-central1-c
 NUM_NODES=2
 MACHINE_TYPE=n1-standard-1
+REGION=us-central1
 ```
 
 Create GKE cluster
 
 ```bash
 gcloud container clusters create $NAME \
---zone $ZONE \
+--region $REGION \
 --username "admin" \
 --cluster-version "latest" \
 --machine-type $MACHINE_TYPE \
@@ -31,7 +32,7 @@ gcloud container clusters create $NAME \
 Get cluster
 
 ```bash
-gcloud container clusters get-credentials $NAME --zone $ZONE
+gcloud container clusters get-credentials $NAME --region $REGION
 ```
 
 Create Storage resources
