@@ -58,10 +58,34 @@ Create Volume
 kubectl apply -f config/pv-and-pvc-nfs.yaml
 ```
 
-Deploy BusyBox
+Connect to nfs to create dummy content
 
 ```bash
-kubectl apply -f config/deployment.yaml 
+kubectl exec -it nfs-server-58fd574d69-pxsrq -- /bin/bash
+```
+
+```bash
+kubectl apply -f config/deployment.yaml
+```
+
+Write content
+
+```bash
+cd /nfsshare
+echo "<h1>Welcome to NFS</h1>" > index.html
+exit
+```
+
+Deploy Nginx server
+
+```bash
+kubectl apply -f config/nginx-deployment.yaml
+```
+
+Create service for Nginx
+
+```bash
+kubectl apply -f config/nginx-service.yaml
 ```
 
 # References

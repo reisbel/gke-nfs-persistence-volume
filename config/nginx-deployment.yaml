@@ -13,7 +13,7 @@ spec:
         app: nginx
     spec:
       volumes:
-        - name: nfs-volume
+        - name: my-pvc-nfs
           nfs:
             server: nfs-server.default.svc.cluster.local
             path: "/"
@@ -22,7 +22,7 @@ spec:
         - name: nginx
           image: nginx
           volumeMounts:
-            - name: nfs-volume
+            - name: my-pvc-nfs
               mountPath: /usr/share/nginx/html
           livenessProbe:
             httpGet:
