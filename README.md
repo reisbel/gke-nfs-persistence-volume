@@ -45,7 +45,7 @@ gcloud container clusters get-credentials $NAME --zone $ZONE
 Create persistence disk
 
 ```bash
-gcloud compute disks create --size=10GB --zone=$ZONE gce-nfs-disk
+gcloud compute disks create --size=50GB --zone=$ZONE gce-nfs-disk --type=pd-ssd
 ```
 
 Create NFS Server
@@ -69,7 +69,7 @@ kubectl apply -f config/pv-and-pvc-nfs.yaml
 Connect to nfs to create dummy content
 
 ```bash
-kubectl exec -it nfs-server-58fd574d69-pxsrq -- /bin/bash
+kubectl exec -it nfs-server-76c5f866d8-b5vq4 -- /bin/bash
 ```
 
 Write content

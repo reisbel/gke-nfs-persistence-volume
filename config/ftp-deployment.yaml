@@ -1,0 +1,40 @@
+apiVersion: apps/v1beta1 # for versions before 1.6.0 use extensions/v1beta1
+kind: Deployment
+metadata:
+  name: my-ftp
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: my-ftp
+    spec:
+      volumes:
+       - name: ftp-my-pvc-nfs
+         nfs:
+            server: nfs-server.default.svc.cluster.local
+            path: "/"
+            readOnly: false
+
+      containers:
+      - name: my-ftp-container
+        image: fauria/vsftpd
+        ports:
+        - containerPort: 21
+          protocol: TCP
+          name: "ftp-server"
+
+        volumeMounts:
+        - mountPath: "/home/vsftpd"
+          name: ftp-my-pvc-nfs
+        env:
+        - name: FTP_USER
+          value: "user"
+        - name: FTP_PASS
+          value: "pass1234"
+        - name: PASV_ADDRESS
+          value: nfs-server.default.svc.cluster.local"34.67.129.191"
+        #- name: PASV_MIN_PORT
+        #  value: "21100"
+        #- name: PASV_MAX_PORT
+        #  value: "21110"
